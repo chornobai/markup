@@ -132,6 +132,19 @@ export default defineConfig(({ command }) => {
       },
       postcss: {
         plugins: [
+          postcssUrl({
+            url: (asset) => {
+              // Якщо шлях починається з папок в public, гарантуємо, що він буде абсолютним від кореня сайту
+              if (
+                asset.url.startsWith("/img/") ||
+                asset.url.startsWith("/icons/") ||
+                asset.url.startsWith("/fonts/")
+              ) {
+                return asset.url; // Залишаємо як є, Vite зрозуміє це як корінь dist/
+              }
+              return asset.url;
+            },
+          }),
           // postcssUrl({
           //   url: (asset) => {
           //     // Если путь начинается с /images/, превращаем /images/foo → ../images/foo
