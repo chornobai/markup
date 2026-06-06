@@ -1,0 +1,186 @@
+
+.page_header {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 32px;
+  margin-bottom: 64px;
+  box-shadow: 0 4px 12px rgb(0 0 0 / 10%),
+  0 -4px 12px rgb(0 0 0 / 10%),
+  inset 0 13px 24px -8px rgb(0 0 0 / 10%);
+  background: rgb(255 255 255 / 69%);
+  border-bottom: 1px solid rgb(0 0 0 / 8%);
+
+  @media (width <= 640px){
+    background: #40AF79;
+    background: linear-gradient(270deg, rgb(64 175 121 / 100%) 0%, rgb(18 71 87 / 100%) 100%)
+  }
+}
+
+.header_wrapper{
+  display: flex;
+  align-items: center;
+  gap: 86px;
+  padding: 19px 0;
+
+  @media (width <= 640px){
+    flex-direction: column;
+    gap: 16px;
+    padding-left:16px;
+    padding-right: 16px;
+
+  }
+}
+
+.header_logo {
+  flex-shrink: 0;
+
+  &_img {
+    display: block;
+    width: 138px;
+    height: 138px;
+    object-fit: contain;
+  }
+}
+
+
+.header_content {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+
+  @media (width <= 640px){
+    color:white;
+  }
+}
+
+.header_content_titel {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+
+  h1 {
+    font-family: Montserrat, sans-serif;
+    font-size: 24px;
+    font-weight: 700;
+    margin: 0;
+
+  }
+}
+
+.header_content_start {
+  display: inline-block;
+  padding: 4px 12px;
+  border: 1.5px solid var(--blue);
+  border-radius: 4px;
+  font-family: Roboto, sans-serif;
+  font-size: 13px;
+  color:var(--blue);
+  white-space: nowrap;
+
+  @media (width <= 640px){
+    color:white;
+    border: 1.5px solid #B3DBC9;
+  }
+}
+
+
+.profile_nav {
+
+}
+
+.profile_stats {
+  display: flex;
+  align-items: center;
+  gap: 24px;
+  list-style: none;
+  margin: 0;
+  padding: 0;
+
+  li a {
+    text-decoration: none;
+    color: inherit;
+    font-size: 15px;
+
+    &:hover {
+      text-decoration: underline;
+    }
+
+    strong {
+      font-weight: 700;
+    }
+  }
+}
+
+
+.profile_filters {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.filter_label {
+  font-size: 16px;
+  color: inherit;
+font-family: Roboto, sans-serif;
+}
+
+.datepicker_group {
+  display: flex;
+  align-items: center;
+  flex-direction: row;
+column-gap:22px;
+  position: relative;
+
+  input[type="text"] {
+    width: 140px;
+    padding: 5px 8px;
+    border: 1.5px solid #d0d0d0;
+    border-radius: 4px;
+    font-size: 14px;
+    color: #1a1a1a;
+    outline: none;
+    transition: border-color 0.2s;
+
+
+    &::placeholder {
+      color: #aaa;
+    }
+
+    &:focus {
+      border-color: var(--blue);;
+    }
+  }
+}
+
+.date_controls{
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  position: relative;
+}
+
+.date_btn{
+  position: absolute;
+  top: 0;
+  right: 0;
+  display: flex;
+  flex-direction: row;
+  background: #EBEBEB;
+  border: 1.5px solid #d0d0d0;
+  border-top-right-radius: 4px;
+  border-bottom-right-radius: 4px;
+}
+
+.datepicker{
+  width:25px;
+  height: 26px;
+border:none;
+  background:url("../../public/icons/icon-close.svg") no-repeat center center;
+
+  &--calendar {
+    border-left: 1.5px solid #d0d0d0;
+    background:  url("../../public/icons/icon-date.svg") no-repeat center center;
+  }
+}
+

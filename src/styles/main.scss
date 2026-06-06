@@ -1,0 +1,11 @@
+// ? CORE STYLES
+@use "./сore/vars";
+@use "./сore/modern-normalize";
+@use "./сore/fonts";
+@use "./сore/base";
+
+// ? COMPONENTS
+
+@use "./header";
+@use "./footer";
+@use "posts";
