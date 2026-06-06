@@ -26,7 +26,7 @@ export default defineConfig(({ command }) => {
 
   return {
     root: ".",
-    base: "/",
+    base: "./",
 
     plugins: [
       // 1) Handlebars для partials
@@ -74,80 +74,6 @@ export default defineConfig(({ command }) => {
           });
         },
       },
-      // 			!isBuild && {
-      // 				name: "floating-menu",
-      // 				transformIndexHtml(html, { path }) {
-      // 					const inputs = getHtmlInputs();
-      // 					const links = Object.entries(inputs)
-      // 						.map(([name, filePath]) => {
-      // 							const fileName = filePath.endsWith("index.html")
-      // 								? "index.html"
-      // 								: "src/pages/" + filePath.split("/src/pages/")[1];
-      // 							const href = name === "index" ? "/" : `/${name}.html`;
-      // 							return `<a href="${href}">${name}</a>`;
-      // 						})
-      // 						.join("");
-      //
-      // 					const menuHtml = `
-      // 	<div id="floating-menu">
-      // 		<div class="floating-trigger">☰</div>
-      // 		<div class="floating-links">
-      // 			${links}
-      // 		</div>
-      // 	</div>
-      // 	<style>
-      // 		#floating-menu {
-      // 			position: fixed;
-      // 			top: 50%;
-      // 			right: 0;
-      // 			transform: translateY(-50%) translateX(calc(100% - 30px));
-      // 			color: #fff;
-      // 			font-size: 14px;
-      // 			z-index: 9999;
-      // 			border-radius: 8px 0 0 8px;
-      // 			overflow: hidden;
-      // 			transition: width 0.3s ease, height 0.3s ease;
-      //
-      // 			display: flex;
-      // 			align-items: center;
-      // 		}
-      // 		#floating-menu:hover  {
-      // 			flex-direction: column;
-      // 			align-items: flex-start;
-      // 			transform: translateY(-50%) translateX(0);
-      // 			background: #222;
-      // 		}
-      // 		.floating-trigger {
-      // 			padding: 8px 10px;
-      // 			background: #444;
-      // 			cursor: pointer;
-      // 			white-space: nowrap;
-      // 		}
-      // 		.floating-links {
-      // 		display: flex;
-      // 			flex-direction: column;
-      // 			padding: 10px;
-      // 			background: #222;
-      // 			white-space: nowrap;
-      // 		}
-      // 		.floating-links a {
-      // 			color: #ffeb3b;
-      // 			text-decoration: none;
-      // 			margin-bottom: 6px;
-      // 			padding-block: 4px 10px;
-      // 			border-bottom: 1px solid #333;
-      // 		}
-      // 		.floating-links a:hover {
-      // 			text-decoration: underline;
-      // 		}
-      //
-      // 	</style>
-      // `;
-      //
-      // 					return html.replace(/<body.*?>/, (match) => `${match}\n${menuHtml}`);
-      // 				},
-      // 			},
-      // vite.config.js
 
       createSvgIconsPlugin({
         iconDirs: [resolve(__dirname, "public/icons")],
