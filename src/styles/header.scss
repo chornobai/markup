@@ -184,3 +184,21 @@ border:none;
   }
 }
 
+.air-datepicker-nav--title,
+.air-datepicker-nav--title i {
+  font-family: "Roboto-Bold", sans-serif !important;
+  font-size: 14px !important;
+  color: #000000 !important;
+  font-weight: 700 !important;
+}
+
+.air-datepicker-cell.-day-[data-day="0"] {
+  background-color: lightgray !important;
+
+}
+.air-datepicker-body--day-name {
+  font-weight: 700 !important;
+  color: black !important
+}
+
+
