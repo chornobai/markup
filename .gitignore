@@ -1,0 +1,32 @@
+# Сборка и логи
+node_modules/
+/dist
+/dist-ssr
+*.local
+*.log
+
+# Файлы окружения (конфиденциальные данные)
+.env
+.env.local
+.env.development.local
+.env.test.local
+.env.production.local
+
+# Кеш инструментов разработки
+.vite/
+.eslintcache
+.stylelintcache
+.tsbuildinfo
+
+# Системные файлы
+.DS_Store
+Thumbs.db
+
+# Настройки IDE и редакторов
+.idea/
+.vscode/
+*.suo
+*.ntvs*
+*.njsproj
+*.sln
+*.swp
