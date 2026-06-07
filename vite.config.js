@@ -1,12 +1,10 @@
 // vite.config.js
 import { defineConfig } from "vite";
 import handlebars from "vite-plugin-handlebars";
-import postcssUrl from "postcss-url";
 import { resolve } from "path";
 import fs from "fs";
 import { createSvgIconsPlugin } from "vite-plugin-svg-icons";
 
-// Собираем все HTML страницы (index + src/pages/*.html)
 function getHtmlInputs() {
   const inputs = { index: resolve(__dirname, "index.html") };
   const pagesDir = resolve(__dirname, "src/pages");
@@ -21,20 +19,16 @@ function getHtmlInputs() {
   return inputs;
 }
 
-export default defineConfig(({ command }) => {
-  const isBuild = command === "build";
-
+export default defineConfig(() => {
   return {
     root: ".",
-    base: "./",
+    base: "/", // ← важливо для Vercel
 
     plugins: [
-      // 1) Handlebars для partials
       handlebars({
         partialDirectory: resolve(__dirname, "src/partials"),
       }),
 
-      // 2) Dev middleware для отдачи любых .html, но через transformIndexHtml
       {
         name: "multi-page-dev",
         configureServer(server) {
@@ -63,9 +57,9 @@ export default defineConfig(({ command }) => {
                 res.statusCode = 500;
                 res.setHeader("Content-Type", "text/html; charset=utf-8");
                 res.end(`
-						<h1>Ошибка в шаблоне</h1>
-						<pre style="color:red; white-space:pre-wrap">${error.message}</pre>
-					`);
+                  <h1>Ошибка в шаблоне</h1>
+                  <pre style="color:red; white-space:pre-wrap">${error.message}</pre>
+                `);
               }
               return;
             }
@@ -80,7 +74,6 @@ export default defineConfig(({ command }) => {
         symbolId: "[name]",
       }),
 
-      // 3) HMR — полная перезагрузка при любых изменениях HTML или partials
       {
         name: "watch-html-and-partials",
         handleHotUpdate({ file, server }) {
@@ -92,15 +85,6 @@ export default defineConfig(({ command }) => {
           ) {
             server.ws.send({ type: "full-reload" });
           }
-        },
-      },
-
-      // 4) Копируем public/ ресурсы в dist/ (Vite делает это сам, но на всякий случай)
-      {
-        name: "copy-public",
-        apply: "build",
-        generateBundle() {
-          /* ничего не делаем — Vite по умолчанию копирует public/ */
         },
       },
     ],
@@ -130,42 +114,7 @@ export default defineConfig(({ command }) => {
       preprocessorOptions: {
         scss: {},
       },
-      postcss: {
-        plugins: [
-          postcssUrl({
-            url: (asset) => {
-              // Якщо шлях починається з папок в public, гарантуємо, що він буде абсолютним від кореня сайту
-              if (
-                asset.url.startsWith("/img/") ||
-                asset.url.startsWith("/icons/") ||
-                asset.url.startsWith("/fonts/")
-              ) {
-                return asset.url; // Залишаємо як є, Vite зрозуміє це як корінь dist/
-              }
-              return asset.url;
-            },
-          }),
-          // postcssUrl({
-          //   url: (asset) => {
-          //     // Если путь начинается с /images/, превращаем /images/foo → ../images/foo
-          //     if (asset.url.startsWith("/img/")) {
-          //       return asset.url.replace(/^\//, "../");
-          //     }
-          //     // аналогично для icons, fonts, favicons
-          //     if (asset.url.startsWith("/icons/")) {
-          //       return asset.url.replace(/^\//, "../");
-          //     }
-          //     if (asset.url.startsWith("/fonts/")) {
-          //       return asset.url;
-          //     }
-          //     if (asset.url.startsWith("/favicons/")) {
-          //       return asset.url.replace(/^\//, "../");
-          //     }
-          //     return asset.url;
-          //   },
-          // }),
-        ],
-      },
+      // postcssUrl видалено — він ламав шляхи
     },
 
     resolve: {
